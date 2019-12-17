@@ -36,8 +36,8 @@
                                             <td>{{ $item->sale_price }}</td>
                                             <td>{{ $item->purchase_price }}</td>
                                             <td>{{ $item->purchase_cost }}</td>
-                                            <td>{{ $item->excess_cost }}</td>
-                                            <td>{{ $item->benefits }}</td>
+                                            <td>{{ $item->excess_cost_18 }}</td>
+                                            <td>{{ $item->benefits_18 }}</td>
                                             </tr>
                                         @empty
                                         Vacio
@@ -51,7 +51,7 @@
                 <!-- /.col-->
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">Beneficio Esperado
                             <div class="card-header-actions"></div>
@@ -59,18 +59,6 @@
                         <div class="card-body">
                             <div class="c-chart-wrapper">
                                 <canvas id="canvas-espected-benefit"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Beneficios
-                            <div class="card-header-actions"></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="c-chart-wrapper">
-                                <canvas id="canvas-benefits"></canvas>
                             </div>
                         </div>
                     </div>
@@ -108,30 +96,10 @@
             var benefitsLabels = []
             var days = []
 
-            const lineChart2 = new Chart(document.getElementById('canvas-benefits'), {
-                type: 'line',
-                data: {
-                    labels : [results.min, results.max],
-                    datasets : [
-                    {
-                        label: `${ product.name } - Cost`,
-                        backgroundColor : 'rgba(151, 187, 205, .5)',
-                        borderColor : 'rgba(151, 187, 205, 1)',
-                        pointBackgroundColor : 'rgba(151, 187, 205, 1)',
-                        pointBorderColor : '#000',
-                        data : [18, 24, 28, 32, 36]
-                    }
-                    ]
-                },
-                options: {
-                    responsive: true
-                }
-            })
-
             const barChar =  new Chart(document.getElementById('canvas-espected-benefit'), {
                 type: 'bar',
                 data: {
-                    labels : [results.num],
+                    labels : [18, 19, 20, 21, 22, 23, 24, 25, 26],
                     datasets : [
                         {
                             label: "Beneficio maximo",
@@ -139,7 +107,17 @@
                             borderColor : 'rgba(220, 220, 220, 0.8)',
                             highlightFill: 'rgba(220, 220, 220, 0.75)',
                             highlightStroke: 'rgba(220, 220, 220, 1)',
-                            data : [results.max]
+                            data : [
+                                results.max_18, 
+                                results.max_19, 
+                                results.max_20, 
+                                results.max_21, 
+                                results.max_22,
+                                results.max_23,
+                                results.max_24,
+                                results.max_25,
+                                results.max_26,
+                            ]
                         },
                         {
                             label: "Beneficio medio",
@@ -147,7 +125,17 @@
                             borderColor : 'rgba(151, 187, 205, 0.8)',
                             highlightFill : 'rgba(151, 187, 205, 0.75)',
                             highlightStroke : 'rgba(151, 187, 205, 1)',
-                            data : [results.min]
+                            data : [
+                                results.min_18, 
+                                results.min_19, 
+                                results.min_20, 
+                                results.min_21, 
+                                results.min_22,
+                                results.min_23,
+                                results.min_24,
+                                results.min_25,
+                                results.min_26,
+                            ]
                         }
                     ]
                 },

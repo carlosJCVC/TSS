@@ -8,7 +8,7 @@ use DB;
 use App\models\SimulationData;
 use App\models\Product;
 
-class SimulationController extends Controller
+class SimulationDefaultController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -59,21 +59,46 @@ class SimulationController extends Controller
         }
 
         $data = DB::table('simulation_data')->where('product_id', $product->id)->get();
-        $benefits = DB::table('simulation_data')->where('product_id', $product->id)->pluck('benefits')->toArray();
-        $desv_stant = $this->stats_standard_deviation ( $benefits );
-        $average = DB::table('simulation_data')->where('product_id', $product->id)->avg('benefits');
-        $interval = ($desv_stant/sqrt($request->number_runs))*1.96;
+
+        $benefits_18 = DB::table('simulation_data')->where('product_id', $product->id)->pluck('benefits_18')->toArray();
+        $desv_stant_18 = $this->stats_standard_deviation ( $benefits_18 );
+        $average_18 = DB::table('simulation_data')->where('product_id', $product->id)->avg('benefits_18');
+        $interval_18 = ($desv_stant_18/sqrt($request->number_runs))*1.96;
         
         $results = [
-            'num' => $request->compare_value,
-            'benefits' => $average,
-            'desvestp' => $desv_stant,
-            'interval_confianza' => $interval,
-            'max' => $average+$interval,
-            'min' => $average-$interval,
+            'nums' => [18,19,20,21,22,23,24,25,26],
+            'max_18' => $this->getAverage($product, 18)+$this->getInterval($product, 18, $request->number_runs),
+            'min_18' => $this->getAverage($product, 18)-$this->getInterval($product, 18, $request->number_runs),
+            'max_19' => $this->getAverage($product, 19)+$this->getInterval($product, 19, $request->number_runs),
+            'min_19' => $this->getAverage($product, 19)-$this->getInterval($product, 19, $request->number_runs),
+            'max_20' => $this->getAverage($product, 20)+$this->getInterval($product, 20, $request->number_runs),
+            'min_20' => $this->getAverage($product, 20)-$this->getInterval($product, 20, $request->number_runs),
+            'max_21' => $this->getAverage($product, 21)+$this->getInterval($product, 21, $request->number_runs),
+            'min_21' => $this->getAverage($product, 21)-$this->getInterval($product, 21, $request->number_runs),
+            'max_22' => $this->getAverage($product, 22)+$this->getInterval($product, 22, $request->number_runs),
+            'min_22' => $this->getAverage($product, 22)-$this->getInterval($product, 22, $request->number_runs),
+            'max_23' => $this->getAverage($product, 23)+$this->getInterval($product, 23, $request->number_runs),
+            'min_23' => $this->getAverage($product, 23)-$this->getInterval($product, 23, $request->number_runs),
+            'max_24' => $this->getAverage($product, 24)+$this->getInterval($product, 24, $request->number_runs),
+            'min_24' => $this->getAverage($product, 24)-$this->getInterval($product, 24, $request->number_runs),
+            'max_25' => $this->getAverage($product, 25)+$this->getInterval($product, 25, $request->number_runs),
+            'min_25' => $this->getAverage($product, 25)-$this->getInterval($product, 25, $request->number_runs),
+            'max_26' => $this->getAverage($product, 26)+$this->getInterval($product, 26, $request->number_runs),
+            'min_26' => $this->getAverage($product, 26)-$this->getInterval($product, 26, $request->number_runs),
         ];
 
-        return View('admin.simulations.index', [ 'product' => $product, 'data' => $data, 'results' => $results]);
+        return View('admin.simulations.default', [ 'product' => $product, 'data' => $data, 'results' => $results]);
+    }
+
+    public function getAverage($product, $num) {
+        return DB::table('simulation_data')->where('product_id', $product->id)->avg('benefits_'.$num);
+    }
+
+    public function getInterval($product, $num, $run) {
+        $benefits = DB::table('simulation_data')->where('product_id', $product->id)->pluck('benefits_'.$num)->toArray();
+        $desv_stant = $this->stats_standard_deviation ( $benefits );
+
+        return ($desv_stant/sqrt($run))*1.96;
     }
 
     function stats_standard_deviation(array $a, $sample = false) {

@@ -30,6 +30,7 @@
                                     <td>{{ $item->created_at }}</td>
                                     <td>
                                         <a class="btn btn-outline-primary" onclick="openEditModal({{ $item->id }})"><i class="icon-pencil"></i></a>
+                                        <a href="{{ route('admin.products.simulate.index', $item->id) }}" class="btn btn-outline-primary">DEMANDAS</i></a>
                                         <form action="{{ route('admin.products.destroy', $item->id) }}"
                                                 style="display:inline-block;"
                                                 method="POST">
@@ -42,7 +43,6 @@
                                                     Eliminar
                                             </button>
                                         </form>
-                                    <a href="{{ route('admin.products.simulate.index', $item->id) }}" class="btn btn-outline-primary">DEMANDAS</i></a>
                                     </td>
                                     </tr>
                                 @empty

@@ -19,18 +19,6 @@
                 </ul>
             </li>
 
-            <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pie-chart"></i> Convocatorias</a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-chart"></i> Lista</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-chart"></i> Nuevo</a>
-                    </li>
-                </ul>
-            </li>
-
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

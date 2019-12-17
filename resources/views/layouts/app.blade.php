@@ -9,14 +9,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link href="{{ asset('css/template.css') }}" rel="stylesheet" type="text/css" />
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div>
+<body style="background-image: url({{ asset('images/fondo.jpg') }}); background-repeat: no-repeat; background-size: cover">
+    <div id="app">
         <main class="py-4">
             @yield('content')
         </main>

@@ -152,4 +152,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.', '
         'as' => 'simulation.index',
         'uses' => 'SimulationController@index',
     ]);
+
+    Route::get('simulation/{product}/default', [
+        'as' => 'simulation.default',
+        'uses' => 'SimulationDefaultController@index',
+    ]);
 });
