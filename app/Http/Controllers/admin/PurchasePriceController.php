@@ -98,6 +98,6 @@ class PurchasePriceController extends Controller
     {
         $purchase_price->delete();
 
-        return redirect(route('admin.purchases_price.index'))->with([ 'message' => 'Precio de compra eliminado exitosamente!', 'alert-type' => 'success' ]);
+        return redirect(route('admin.products.simulate.index', $purchase_price->product_id))->with([ 'message' => 'Precio de compra eliminado exitosamente!', 'alert-type' => 'success' ]);
     }
 }

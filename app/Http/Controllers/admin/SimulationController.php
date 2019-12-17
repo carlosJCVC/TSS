@@ -102,8 +102,8 @@ class SimulationController extends Controller
 
         //$max = DB::table('demands')->max('accumulate_probability');
         //$min = DB::table('demands')->min('accumulate_probability');
-        $demands = DB::table('demands')->where('product_id', $product->id)->pluck('sold_units', 'accumulate_probability');
-        
+        $demands = DB::table('demands')->where('product_id', $product->id)->get();
+
         $num = $this->getRandonNumber();
 
         $value = $this->getDemandClosest($demands, $num);
@@ -113,22 +113,22 @@ class SimulationController extends Controller
 
     public function getSaleValue($product) {
 
-        $sales = DB::table('sales_price')->where('product_id', $product->id)->pluck('sales_price', 'accumulate_probability');
+        $sales = DB::table('sales_price')->where('product_id', $product->id)->get();
         
         $num = $this->getRandonNumber();
 
-        $value = $this->getDemandClosest($sales, $num);
+        $value = $this->getSaleClosest($sales, $num);
         
         return $value+1;
     }
 
     public function getPurchaseValue($product) {
 
-        $purchases = DB::table('purchases_price')->where('product_id', $product->id)->pluck('purchases_price', 'accumulate_probability');
+        $purchases = DB::table('purchases_price')->where('product_id', $product->id)->get();
 
         $num = $this->getRandonNumber();
 
-        $value = $this->getDemandClosest($purchases, $num);
+        $value = $this->getPurchaseClosest($purchases, $num);
         
         return $value+1;
     }
@@ -137,14 +137,48 @@ class SimulationController extends Controller
     {
         $cercano = 0;
         $diff = 20000000;
-        
         foreach ($numbers as $key => $value) {
-            if ($key == $num) {
+            if ($value->accumulate_probability == $num) {
                 return $value;
             } else {
-                if (abs($key - $num) < $diff) {
-                    $cercano = $value;
-                    $diff = abs($key - $num);
+                if (abs($value->accumulate_probability - $num) < $diff) {
+                    $cercano = $value->sold_units;
+                    $diff = abs($value->accumulate_probability - $num);
+                }
+            }
+        }
+
+        return $cercano;
+    }
+
+    public function getPurchaseClosest($numbers, $num)
+    {
+        $cercano = 0;
+        $diff = 20000000;
+        foreach ($numbers as $key => $value) {
+            if ($value->accumulate_probability == $num) {
+                return $value;
+            } else {
+                if (abs($value->accumulate_probability - $num) < $diff) {
+                    $cercano = $value->purchases_price;
+                    $diff = abs($value->accumulate_probability - $num);
+                }
+            }
+        }
+
+        return $cercano;
+    }
+
+    public function getSaleClosest($numbers, $num) {
+        $cercano = 0;
+        $diff = 20000000;
+        foreach ($numbers as $key => $value) {
+            if ($value->accumulate_probability == $num) {
+                return $value;
+            } else {
+                if (abs($value->accumulate_probability - $num) < $diff) {
+                    $cercano = $value->sales_price;
+                    $diff = abs($value->accumulate_probability - $num);
                 }
             }
         }

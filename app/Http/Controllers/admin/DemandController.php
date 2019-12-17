@@ -98,6 +98,6 @@ class DemandController extends Controller
     {
         $demand->delete();
 
-        return redirect(route('admin.demands.index'))->with([ 'message' => 'Demanda eliminado exitosamente!', 'alert-type' => 'success' ]);
+        return redirect(route('admin.products.simulate.index', $demand->product_id))->with([ 'message' => 'Demanda eliminado exitosamente!', 'alert-type' => 'success' ]);
     }
 }

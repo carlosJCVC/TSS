@@ -52,7 +52,7 @@
 
     <footer class="app-footer">
         <span><a href="#">UMSS</a> &copy; 2019</span>
-        <span class="ml-auto">Desarrollado por <a href="#">carlosveizaga.jcvc@gmail.com</a></span>
+        <span class="ml-auto">Desarrollado por <a href="#">grupos5</a></span>
     </footer>
 
     <script src="{{ asset('js/template.js') }}" type="text/javascript"></script>

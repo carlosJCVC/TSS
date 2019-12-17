@@ -110,6 +110,6 @@ class SalePriceController extends Controller
     {
         $sale_price->delete();
 
-        return redirect(route('admin.sales_price.index'))->with([ 'message' => 'Precio de Venta compra eliminado exitosamente!', 'alert-type' => 'success' ]);
+        return redirect(route('admin.products.simulate.index', $sale_price->product_id))->with([ 'message' => 'Precio de Venta compra eliminado exitosamente!', 'alert-type' => 'success' ]);
     }
 }
