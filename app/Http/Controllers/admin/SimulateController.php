@@ -30,7 +30,7 @@ class SimulateController extends Controller
      */
     public function simulate(Product $product)
     {
-        return View('admin.simulations.index', [ 'product' => $product, 'data' => []]);
+        return View('admin.simulations.index', [ 'product' => $product, 'data' => [], 'results' => []]);
     }
     
 }
