@@ -15,35 +15,35 @@ class purchasesSeeder extends Seeder
         $items = [
             [
                 'product_id' => 1,
-                'purchases_price' => 10,
-                'number_days' => 20,
+                'purchases_price' => 5,
+                'number_days' => 15,
                 'probability' => 0.14,
                 'accumulate_probability' => 0.14
             ],
             [
                 'product_id' => 1,
-                'purchases_price' => 12,
-                'number_days' => 30,
+                'purchases_price' => 7,
+                'number_days' => 25,
                 'probability' => 0.23,
                 'accumulate_probability' => 0.36
             ],
             [
                 'product_id' => 1,
-                'purchases_price' => 14,
-                'number_days' => 40,
+                'purchases_price' => 9,
+                'number_days' => 35,
                 'probability' => 0.32,
                 'accumulate_probability' => 0.68
             ],
             [
                 'product_id' => 1,
-                'purchases_price' => 16,
-                'number_days' => 30,
+                'purchases_price' => 11,
+                'number_days' => 25,
                 'probability' => 0.23,
                 'accumulate_probability' => 0.91
             ],
             [
                 'product_id' => 1,
-                'purchases_price' => 18,
+                'purchases_price' => 17,
                 'number_days' => 10,
                 'probability' => 0.09,
                 'accumulate_probability' => 1.00

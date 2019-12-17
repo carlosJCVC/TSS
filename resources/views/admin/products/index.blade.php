@@ -13,62 +13,53 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <table id="datatable-products" class="table table-responsive-sm table-bordered table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre de Producto</th>
-                                    <th>Fecha Creada</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($products as $item)
-                                <tr>
-                                    <td>{{ $loop->index+1 }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->created_at }}</td>
-                                    <td>
-                                        <a class="btn btn-outline-primary" onclick="openEditModal({{ $item->id }})"><i class="icon-pencil"></i></a>
-                                        <a href="{{ route('admin.products.simulate.index', $item->id) }}" class="btn btn-outline-primary">DEMANDAS</i></a>
-                                        <form action="{{ route('admin.products.destroy', $item->id) }}"
-                                                style="display:inline-block;"
-                                                method="POST">
-                
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-            
-                                            <button type="button" class="btn btn-outline-danger"
-                                                    onclick="delete_action(event);">
-                                                    Eliminar
-                                            </button>
-                                        </form>
-                                    </td>
+                        <div style="position: relative; height: 450px; overflow: auto; display: block">
+                            <table id="datatable-products" class="table table-responsive-sm table-bordered table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre de Producto</th>
+                                        <th>Fecha Creada</th>
+                                        <th>Acciones</th>
                                     </tr>
-                                @empty
-                                    Vacio
-                                @endforelse
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @forelse ($products as $item)
+                                    <tr>
+                                        <td>{{ $loop->index+1 }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->created_at }}</td>
+                                        <td>
+                                            <a class="btn btn-outline-primary" onclick="openEditModal({{ $item->id }})"><i class="icon-pencil"></i></a>
+                                            <a href="{{ route('admin.products.simulate.index', $item->id) }}" class="btn btn-outline-primary">DEMANDAS</i></a>
+                                            <form action="{{ route('admin.products.destroy', $item->id) }}"
+                                                    style="display:inline-block;"
+                                                    method="POST">
+                    
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                
+                                                <button type="button" class="btn btn-outline-danger"
+                                                        onclick="delete_action(event);">
+                                                        Eliminar
+                                                </button>
+                                            </form>
+                                        </td>
+                                        </tr>
+                                    @empty
+                                        Vacio
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
 
                         @if (count($errors) > 0)
-                        <script>
-                            $( document ).ready(function() {
-                                $('#modalNuevo').modal('show');
-                            });
-                        </script>
-                    @endif
-
-                        <nav>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                        </nav>
+                            <script>
+                                $( document ).ready(function() {
+                                    $('#modalNuevo').modal('show');
+                                });
+                            </script>
+                        @endif
                     </div>
                 </div>
             </div>

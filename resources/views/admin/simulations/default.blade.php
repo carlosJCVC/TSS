@@ -50,17 +50,23 @@
                 </div>
                 <!-- /.col-->
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Beneficio Esperado
-                            <div class="card-header-actions"></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="c-chart-wrapper">
-                                <canvas id="canvas-espected-benefit"></canvas>
-                            </div>
-                        </div>
+            <div class="card">
+                <div class="card-header">Beneficio Esperado
+                    <div class="card-header-actions"></div>
+                </div>
+                <div class="card-body">
+                    <div class="c-chart-wrapper">
+                        <canvas id="canvas-espected-benefit"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Costos
+                    <div class="card-header-actions"></div>
+                </div>
+                <div class="card-body">
+                    <div class="c-chart-wrapper">
+                        <canvas id="canvas-espected-costs"></canvas>
                     </div>
                 </div>
             </div>
@@ -91,7 +97,7 @@
             var data = @json($data);
             var product = @json($product);
             var results = @json($results);
-
+            console.log(results);
             var costs = []
             var benefitsLabels = []
             var days = []
@@ -135,6 +141,54 @@
                                 results.min_24,
                                 results.min_25,
                                 results.min_26,
+                            ]
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true
+                }
+            })
+
+            const barCharCost =  new Chart(document.getElementById('canvas-espected-costs'), {
+                type: 'bar',
+                data: {
+                    labels : [18, 19, 20, 21, 22, 23, 24, 25, 26],
+                    datasets : [
+                        {
+                            label: "Costo maximo",
+                            backgroundColor : 'rgba(10, 20, 220, 0.5)',
+                            borderColor : 'rgba(220, 220, 220, 0.8)',
+                            highlightFill: 'rgba(220, 220, 220, 0.75)',
+                            highlightStroke: 'rgba(220, 220, 220, 1)',
+                            data : [
+                                results.costmax_18, 
+                                results.costmax_19, 
+                                results.costmax_20, 
+                                results.costmax_21, 
+                                results.costmax_22,
+                                results.costmax_23,
+                                results.costmax_24,
+                                results.costmax_25,
+                                results.costmax_26,
+                            ]
+                        },
+                        {
+                            label: "Costo medio",
+                            backgroundColor : 'rgba(50, 187, 205, 0.5)',
+                            borderColor : 'rgba(151, 187, 205, 0.8)',
+                            highlightFill : 'rgba(151, 187, 205, 0.75)',
+                            highlightStroke : 'rgba(151, 187, 205, 1)',
+                            data : [
+                                results.costmin_18, 
+                                results.costmin_19, 
+                                results.costmin_20, 
+                                results.costmin_21, 
+                                results.costmin_22,
+                                results.costmin_23,
+                                results.costmin_24,
+                                results.costmin_25,
+                                results.costmin_26,
                             ]
                         }
                     ]
