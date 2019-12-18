@@ -46,10 +46,16 @@ class SalePriceController extends Controller
         $input = $request->all();
         $input['product_id'] = $product->id;
 
+        $accumulate = DB::table('sales_price')->sum('probability');
+        if (($accumulate+$request->probability) > 1 ) {
+            return redirect(route('admin.products.simulate.index', $product->id))->with([ 'message' => 'La acumulacion de probabilidad sobrepasa 1!', 'alert-type' => 'error' ]);
+        }
+        $input['accumulate_probability'] = $accumulate + $input['probability'];
+
         $sale_price = new SalePrice($input);
         $sale_price->save();
 
-        $this->updateSales();
+        //$this->updateSales();
 
         return redirect(route('admin.products.simulate.index', $product->id))->with([ 'message' => 'Precio de Venta creado exitosamente!', 'alert-type' => 'success' ]);
     }

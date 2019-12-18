@@ -157,4 +157,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.', '
         'as' => 'simulation.default',
         'uses' => 'SimulationDefaultController@index',
     ]);
+
+    //-----------PDF--------------//
+    Route::get('print/simulation', [
+        'as' => 'simulation.print',
+        'uses' => 'PrintController@index',
+    ]);
 });

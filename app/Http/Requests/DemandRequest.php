@@ -30,15 +30,17 @@ class DemandRequest extends FormRequest
             }
             case 'POST': {
                 return [
-                    'sold_units' => 'required|numeric|max:100',
-                    'number_days' => 'required|numeric|max:100',
+                    'sold_units' => 'required|numeric',
+                    'number_days' => 'required|numeric',
+                    'probability' => 'required|numeric',
                 ];
             }
             case 'PUT':
             case 'PATCH': {
                 return [
-                    'sold_units' => 'required|numeric|max:100',
-                    'number_days' => 'required|numeric|max:100',
+                    'sold_units' => 'required|numeric',
+                    'number_days' => 'required|numeric',
+                    'probability' => 'required|numeric',
                 ];
             }
             default:
@@ -55,11 +57,12 @@ class DemandRequest extends FormRequest
         return [
             'sold_units.required' => 'El campo :attribute es obligatorio.',
             'sold_units.numeric' => 'El campo :attribute solo puede contener numeros.',
-            'sold_units.max' => 'El campo :attribute no debe ser mayor a 100 caracteres.',
+            
+            'probability.numeric' => 'El campo :attribute solo puede contener numeros.',
+            'probability.required' => 'El campo :attribute solo puede contener numeros.',
             
             'number_days.required' => 'El campo :attribute es obligatorio.',
             'number_days.numeric' => 'El campo :attribute solo puede contener numeros.',
-            'number_days.max' => 'El campo :attribute no debe ser mayor a 100 caracteres.',
         ];
     }
 
@@ -68,6 +71,7 @@ class DemandRequest extends FormRequest
         return [
             'sold_units' => 'Unidades Vendidas',
             'number_days' => 'Numero de dias',
+            'probability' => 'Numero de dias',
         ];
     }
 }

@@ -31,6 +31,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label" for="email-input">Probabilidad</label>
+                    <div class="col-md-9">
+                        <input type="text" id="probability" name="probability" class="form-control {{ $errors->has('probability')? 'is-invalid' : ''}}" placeholder="Probability">
+                        <div class="invalid-feedback {{ $errors->has('probability')? 'd-block' : '' }}">
+                            {{ $errors->has('probability')? $errors->first('probability') : 'El campo de unidades es requerido'  }}
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-success">Guardar</button>

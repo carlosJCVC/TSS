@@ -124,23 +124,37 @@
             });
             //const random = () => Math.round(Math.random() * 100)
             const lineChart = new Chart(document.getElementById('canvas-1'), {
-            type: 'line',
-            data: {
-                labels : days,
-                datasets : [
-                {
-                    label: `${ product.name } + Demands`,
-                    backgroundColor : backgroundColors,
-                    borderColor : borderColors,
-                    pointBackgroundColor : 'rgba(151, 187, 205, 1)',
-                    pointBorderColor : '#000',
-                    data : values
+                type: 'line',
+                data: {
+                    labels : days,
+                    datasets : [
+                        {
+                            label: `${ product.name } - Nro dias vs Demands`,
+                            backgroundColor : backgroundColors,
+                            borderColor : borderColors,
+                            pointBackgroundColor : 'rgba(151, 187, 205, 1)',
+                            pointBorderColor : '#000',
+                            data : values
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Unidades vendidas'
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Nro dias'
+                            }
+                        }]
+                    } 
                 }
-                ]
-            },
-            options: {
-                responsive: true
-            }
             })
         }
 
@@ -159,23 +173,37 @@
             });
             //const random = () => Math.round(Math.random() * 100)
             const lineChart = new Chart(document.getElementById('canvas-sales'), {
-            type: 'line',
-            data: {
-                labels : days,
-                datasets : [
-                {
-                    label: `${ product.name } + Precio de venta`,
-                    backgroundColor : 'rgba(151, 187, 205, 0.2)',
-                    borderColor : 'rgba(151, 187, 205, 1)',
-                    pointBackgroundColor : 'rgba(151, 187, 205, 1)',
-                    pointBorderColor : '#fff',
-                    data : values
+                type: 'line',
+                data: {
+                    labels : days,
+                    datasets : [
+                    {
+                        label: `${ product.name } - Nro dias vs Precio de venta`,
+                        backgroundColor : 'rgba(151, 187, 205, 0.2)',
+                        borderColor : 'rgba(151, 187, 205, 1)',
+                        pointBackgroundColor : 'rgba(151, 187, 205, 1)',
+                        pointBorderColor : '#fff',
+                        data : values
+                    }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Precio de venta'
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Nro dias'
+                            }
+                        }]
+                    }
                 }
-                ]
-            },
-            options: {
-                responsive: true
-            }
             })
         }
 
@@ -194,23 +222,37 @@
             });
             //const random = () => Math.round(Math.random() * 100)
             const lineChart = new Chart(document.getElementById('canvas-purchases'), {
-            type: 'line',
-            data: {
-                labels : days,
-                datasets : [
-                {
-                    label: `${ product.name } + Precio de Compra`,
-                    backgroundColor : backgroundColors,
-                    borderColor : borderColors,
-                    pointBackgroundColor : 'rgba(151, 187, 205, 1)',
-                    pointBorderColor : '#fff',
-                    data : values
+                type: 'line',
+                data: {
+                    labels : days,
+                    datasets : [
+                    {
+                        label: `${ product.name } + Precio de Compra`,
+                        backgroundColor : backgroundColors,
+                        borderColor : borderColors,
+                        pointBackgroundColor : 'rgba(151, 187, 205, 1)',
+                        pointBorderColor : '#fff',
+                        data : values
+                    }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Precio compra'
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Nro dias'
+                            }
+                        }]
+                    }
                 }
-                ]
-            },
-            options: {
-                responsive: true
-            }
             })
         }
 

@@ -1,6 +1,21 @@
 @extends('admin.layouts.app')
 
 @section('content')
+@php
+//dd($results);
+$i = 18;
+$max = -1;
+$units = -1;
+    foreach ($results as $key => $value) {
+        if ($key == 'max_'.$i) {
+            if ($max<$value) {
+                $max = $value;
+                $units = $i;
+            }
+            $i++;
+        }
+    }
+@endphp
 <div class="container-fluid">
     <div class="fade-in">
         <div class="card">
@@ -13,7 +28,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header"><i class="fa fa-align-justify"></i> Datos de la simulacion</div>
+                        <div class="card-header">
+                            <i class="fa fa-align-justify"></i> Datos de la simulacion
+                            <a class="btn btn-outline-success float-right" href="{{ route('admin.simulation.print') }}">Exportar PDF</a>
+                        </div>
                         <div class="card-body">
                             <div style="position: relative; height: 200px; overflow: auto; display: block">
                                 <table class="table table-responsive-sm table-bordered table-striped table-sm">
@@ -49,6 +67,13 @@
                     </div>
                 </div>
                 <!-- /.col-->
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <span>Los resultados de la simulacion indican que la desicion que maximiza el beneficio es realizar un pedido de </span>
+                    {{-- <span>Max {{ $max }}</span> --}}
+                    <span><b> Unidades {{ $units }}</b></span>
+                </div>
             </div>
             <div class="card">
                 <div class="card-header">Beneficio Esperado

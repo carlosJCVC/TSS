@@ -13,6 +13,7 @@
                         <th>#</th>
                         <th>Unidades Vendidas</th>
                         <th>Nro. de dias</th>
+                        <th>Probabilidad</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -22,6 +23,7 @@
                         <td>{{ $loop->index+1 }}</td>
                         <td>{{ $item->sold_units }}</td>
                             <td>{{ $item->number_days }}</td>
+                            <td>{{ $item->probability }}</td>
                             <td>
                                 <form action="{{ route('admin.demands.destroy', $item->id) }}"
                                         style="display:inline-block;"

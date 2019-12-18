@@ -34,10 +34,16 @@ class DemandController extends Controller
         $input = $request->all();
         $input['product_id'] = $product->id;
 
+        $accumulate = DB::table('demands')->sum('probability');
+        if (($accumulate+$request->probability) > 1 ) {
+            return redirect(route('admin.products.simulate.index', $product->id))->with([ 'message' => 'La acumulacion de probabilidad sobrepasa 1!', 'alert-type' => 'error' ]);
+        }
+        $input['accumulate_probability'] = $accumulate + $input['probability'];
+
         $demand = new Demand($input);
         $demand->save();
 
-        $this->updateDemands();
+        //$this->updateDemands();
 
         return redirect(route('admin.products.simulate.index', $product->id))->with([ 'message' => 'Demanda creado exitosamente!', 'alert-type' => 'success' ]);
     }
