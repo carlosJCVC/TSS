@@ -13,7 +13,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header"><i class="fa fa-align-justify"></i> Datos de la simulacion</div>
+                        <div class="card-header">
+                            <i class="fa fa-align-justify"></i> Datos de la simulacion
+                            <a class="btn btn-outline-success float-right" href="{{ route('admin.simulation.print') }}">Exportar PDF</a>
+                        </div>
                         <div class="card-body">
                             <div style="position: relative; height: 200px; overflow: auto; display: block">
                                 <table class="table table-responsive-sm table-bordered table-striped table-sm">
@@ -49,6 +52,13 @@
                     </div>
                 </div>
                 <!-- /.col-->
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <span>Los resultados de la simulacion indican que la desición de realizar un pedido de </span>
+                    {{-- <span>Max {{ $max }}</span> --}}
+                    <span><b> Unidades {{ $results['num'] }}</b> tiene un beneficio maximo de {{ $results['max'] }} con una media de {{ $results['min'] }}</span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
