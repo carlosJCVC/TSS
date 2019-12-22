@@ -2,6 +2,7 @@ require('./bootstrap');
 window.Swal = require('sweetalert2');
 window.$ = window.jQuery = require('jquery');
 window.toastr = require("toastr");
+window.jsPDF = require('jspdf'); 
 
 toastr.options = {
     "closeButton": true,

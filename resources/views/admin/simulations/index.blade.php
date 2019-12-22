@@ -54,10 +54,11 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">Beneficio Esperado
+                            <a class="export-pdf btn btn-success float-right" href="#">Exportar PDF</a>
                             <div class="card-header-actions"></div>
                         </div>
                         <div class="card-body">
-                            <div class="c-chart-wrapper">
+                            <div class="c-chart-wrapper export-benefits">
                                 <canvas id="canvas-espected-benefit"></canvas>
                             </div>
                         </div>
@@ -66,11 +67,12 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">Beneficios
+                            <a class="export-pdf-line btn btn-success float-right" href="#">Exportar PDF</a>
                             <div class="card-header-actions"></div>
                         </div>
                         <div class="card-body">
-                            <div class="c-chart-wrapper">
-                                <canvas id="canvas-benefits"></canvas>
+                            <div class="c-chart-wrapper export-benefits-line">
+                                <canvas id="canvas-benefits-line"></canvas>
                             </div>
                         </div>
                     </div>
@@ -108,7 +110,7 @@
             var benefitsLabels = []
             var days = []
 
-            const lineChart2 = new Chart(document.getElementById('canvas-benefits'), {
+            const lineChart2 = new Chart(document.getElementById('canvas-benefits-line'), {
                 type: 'line',
                 data: {
                     labels : [results.min, results.max],
@@ -157,6 +159,58 @@
             })
         }
 
+        const getGraphic = (className, graphic) => {
+            // get size of report page
+            var reportPageHeight = $(className).innerHeight();
+            var reportPageWidth = $(className).innerWidth();
+            
+            // create a new canvas object that we will populate with all other canvas objects
+            var pdfCanvas = $('<canvas />').attr({
+                id: "canvaspdf",
+                width: reportPageWidth,
+                height: reportPageHeight
+            });
+
+            // keep track canvas position
+            var pdfctx = $(pdfCanvas)[0].getContext('2d');
+            var pdfctxX = 0;
+            var pdfctxY = 0;
+            var buffer = 100;
+            
+            // for each chart.js chart
+            $(graphic).each(function(index) {
+                // get the chart height/width
+                var canvasHeight = $(this).innerHeight();
+                var canvasWidth = $(this).innerWidth();
+
+                // draw the chart into the new canvas
+                pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+                pdfctxX += canvasWidth + buffer;
+                
+                // our report page is in a grid pattern so replicate that in the new canvas
+                if (index % 2 === 1) {
+                    pdfctxX = 0;
+                    pdfctxY += canvasHeight + buffer;
+                }
+            });
+            
+            // create new pdf and add our new canvas as an image
+            var pdf = new jsPDF();
+            pdf.addImage($(pdfCanvas)[0], 'JPEG', 0, 0);
+            //pdf.addImage(pdfCanvas.toDataURL("image/jpeg",1), 'JPEG', 10, 10, 190, 277);
+
+            // download the pdf
+            pdf.save('graficos.pdf');
+        }
+
         loadgraphicData()
+
+        $('.export-pdf').click(function () {
+            getGraphic('.export-benefits', '#canvas-espected-benefit')
+        })
+        
+        $('.export-pdf-line').click(function () {
+            getGraphic('.export-benefits-line', '#canvas-benefits-line')
+        })
     </script>
 @endsection
